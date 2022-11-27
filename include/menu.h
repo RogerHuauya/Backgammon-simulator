@@ -7,8 +7,10 @@
 #include <string>
 #include <iostream>
 #include "player.h"
+#include "board.h"
 void menu();
 void register_player();
 void set_turn();
 void init_game();
+bool validate_number_of_players();
 #endif //BACKGAMMON_SIMULATOR_MENU_H

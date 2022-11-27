@@ -10,10 +10,25 @@
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
-void Board::init_board() {
+void Board::reset_board() {
     for(int i = 0; i < COLUMNS_SIZE; i++){
         table[i] = "     ";
     }
+}
+
+void Board::update_table() {
+    for(auto& token: player1->tokens){
+        if(token.get_activate()) {
+            table[token.get_position()][token.get_level()] = player1->token_type;
+        }
+    }
+
+    for(auto& token: player2->tokens){
+        if(token.get_activate()) {
+            table[token.get_position()][token.get_level()] = player2->token_type;
+        }
+    }
+
 }
 
 
@@ -143,6 +158,25 @@ void Board::display_board(){
 
 
 }
+
+void Board::play(){
+    dice1.roll_dice();
+    dice2.roll_dice();
+    if(player_turn == 1){
+        cout<<"−−−−−Turno de Jugador \""<< player1->get_username() << "\"-----"<<endl;
+        get_choice();
+        player1->move_token()
+    }
+    else if(player_turn == 2){
+        cout<<"−−−−−Turno de Jugador \""<< player2->get_username() << "\"-----"<<endl;
+    }
+}
+
+void Board::get_choice(){
+    cout<<"Dados: " << dice1<<" "<<dice2<<endl;
+
+}
+
 
 
 

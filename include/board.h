@@ -17,13 +17,16 @@ class Board{
     Player *player1, *player2;
     Dice dice1, dice2;
     vector<string> table;
+    int player_turn = 0;
 public:
     Board(){
         dice1 = Dice();
         dice2 = Dice();
     }
 
-    void init_board();
+    void reset_board();
+
+    void update_table();
 
     void display_board();
 
@@ -34,5 +37,10 @@ public:
     void set_player2(Player* player){
         player2 = player;
     }
+    void play();
+
+    void get_choice();
+
+    friend class Player;
 };
 #endif //BACKGAMMON_SIMULATOR_BOARD_H

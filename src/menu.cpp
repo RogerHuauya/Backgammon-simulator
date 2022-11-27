@@ -6,6 +6,7 @@
 using namespace std;
 
 vector<Player> player_list;
+Board game_board;
 void menu(){
     int op;
     cout<<"Main menu\n";
@@ -21,7 +22,8 @@ void menu(){
         case 1:  register_player(); break;
     }
 };
-//me fui a almorzar regreso en un rato ._.
+
+
 void register_player(){
     string name, password;
     cout<<"Ingrese su usuario: ";
@@ -29,17 +31,53 @@ void register_player(){
     cout<<"Ingrese su contraseña: ";
     cin>>password;
     cout<<"Usuario "<<name<<" creado exitosamente";
-    player_list.push_back(Player(name, password, true));
+    player_list.push_back(Player(name, password));
 }
 
 void set_turn(){
+    string name,name2, pass2, pass;
+    bool ans1 = false;
     cout<<"Jugador 1"<<endl;
+    cout<<"Ingrese su usuario: ";
+    cin>>name;
+    cout<<"Ingrese su contrasena: ";
+    cin>>pass;
+    for(auto & i : player_list){
+        if(i.get_username() == name) {
+            ans1 = i.login(pass);
+            if (ans1) {
+                game_board.set_player1(&i);
+            }
+        }
+    }
+    if(!ans1){
+        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario";
+        return;
+    }
+
+    cout<<"Jugador 2"<<endl;
+    cout<<"Ingrese su usuario: ";
+    cin>>name;
+    cout<<"Ingrese su contrasena: ";
+    cin>>pass;
+    for(int i = 0; i < player_list.size(); i ++){
+        if(player_list[i].get_username() == name) {
+            ans = player_list[i].login(pass);
+            if (ans) {
+                game_board.set_player2(&player_list[i]);
+            }
+        }
+    }
 
 }
 
 void init_game(){
-    //se supone que va if(validate_number_of_players == true){turno 1} else {return to menu}
+    if(validate_number_of_players()){
+        register_player();
+        cout<<"Dados para Jugador 1: "<<endl;
+    } else {cout<<"Regresar al menu";}
 }
+
 bool validate_number_of_players(){
     if(player_list.size()<2){
         return true;

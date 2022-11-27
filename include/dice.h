@@ -17,9 +17,15 @@ public:
         value = rand()%6 + 1;
     }
 
-    int roll_dice_and_get_value(){
-        roll_dice();
+    int get_value(){
         return value;
     }
+
+    friend ostream& operator<<(ostream &os, const Dice& d);
 };
+
+ostream& operator<<(ostream &os, const Dice& d){
+    os<<d.value;
+    return os;
+}
 #endif //BACKGAMMON_SIMULATOR_DICE_H
