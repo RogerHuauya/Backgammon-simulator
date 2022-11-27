@@ -17,12 +17,11 @@ public:
         value = rand()%6 + 1;
     }
 
-    const int get_value(){
+    int get_value(){
         return value;
-    }
+    };
 
     friend ostream& operator<<(ostream &os, const Dice& d);
 };
 
-//extern ostream& operator<<(ostream &os, const Dice& d);
 #endif //BACKGAMMON_SIMULATOR_DICE_H

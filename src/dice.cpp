@@ -3,9 +3,5 @@
 //
 #include "../include/dice.h"
 
-/*
-ostream& operator<<(ostream &os, const Dice& d){
-    os<< "hp;a" ;
-    return os;
-}
- */
+
+

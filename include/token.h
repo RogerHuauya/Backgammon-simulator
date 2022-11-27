@@ -9,37 +9,38 @@
 #include "constants.h"
 using namespace std;
 
-class Token{
+class Token {
 protected:
     int position, level;
     bool activate;
     bool is_token_up;
 public:
-    Token(int _position, int _level):position(_position),level(_level){
+    Token(int _position, int _level) : position(_position), level(_level) {
         activate = true;
     }
-    void set_position(int pos){
+
+    void set_position(int pos) {
         position = pos;
     }
 
-    void set_level(int lev){
+    void set_level(int lev) {
         level = lev;
     }
 
-    virtual int get_position()=0;
-    virtual bool get_activate()=0;
-    virtual int get_level()=0;
-    bool get_token_type(){
+    virtual int get_position() = 0;
+
+    virtual bool get_activate() = 0;
+
+    virtual int get_level() = 0;
+
+    bool get_token_type() {
         return is_token_up;
     }
-    virtual void move_token(int hop, int _level)=0;
-    virtual ~Token(){};
-    bool operator<(Token& token) const{
-        if (position == token.get_position()) {
-            return level > token.get_level();
-        }
-        return position < token.get_position();
-    }
+
+    virtual void move_token(int hop, int _level) = 0;
+
+    virtual ~Token() {};
+
 };
 
 class TokenUp:public Token{
@@ -63,7 +64,7 @@ public:
         return activate;
     }
 
-    bool operator < ( Token& token) const{
+    bool operator < ( TokenUp& token) const{
         if (position == token.get_position()) {
             return level > token.get_level();
         }

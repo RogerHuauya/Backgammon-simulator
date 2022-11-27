@@ -1,10 +1,4 @@
-//
-// Created by roger on 11/27/2022.
-//
 
-//
-// Created by Roger Huauya Mamani on 27/11/22.
-//
 
 #include "../include/board.h"
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -33,6 +27,7 @@ void Board::update_table() {
 
 
 void Board::display_board(){
+
     //Impresion de los números
     color(hConsole,14);
     std::cout << DIVISION_LINE << "\n";
@@ -172,10 +167,12 @@ void Board::play(){
         player2->move_player_token(1,1);
     }
 }
-
+ostream& operator<<(ostream &os, const Dice& d){
+    os << d.value;
+    return os;
+}
 void Board::get_choice(){
-    //cout<<"Dados: " << dice1<<" "<<dice2<<endl;
-
+    cout<<"Dados: " << dice1<<" "<<dice2<<endl;
 }
 
 

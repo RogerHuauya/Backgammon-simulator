@@ -86,7 +86,7 @@ void menu(){
     int op;
     do{
         cout << "Main menu\n";
-        cout << "−−−−−−− BIENVENIDO A BACKGAMMON −−−−−−−" << endl;
+        cout << "------ BIENVENIDO A BACKGAMMON ------" << endl;
         cout << "Seleccione una de las siguientes opciones:" << endl;
         cout << "[1] Registrar Jugador" << endl;
         cout << "[2] Establecer turno" << endl;
@@ -102,13 +102,23 @@ void menu(){
                 set_turn();
                 break;
             case 3:
-                /*
-                reset_board();
+                game_board.set_player1(&player_list[0]);
+                game_board.set_player1(&player_list[1]);
+                cout << "El turno del juego es el siguiente" << endl;
+                cout << "1. El jugador  \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha"
+                << "\"" << game_board.get_player1()->getToken() << endl;
 
-                update_table();
+                cout << "2. El jugador  \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha"
+                     << "\"" << game_board.get_player2()->getToken() << endl;
 
-                display_board();
-                 */
+
+                game_board.reset_board();
+
+                game_board.update_table();
+
+                game_board.display_board();
+
+                op = 0;
                 break;
             default:
                 cout << "Opcion no valida" << endl;
@@ -116,4 +126,16 @@ void menu(){
         }
         clear_terminal();
     }while(op != 0);
-};
+
+
+    do{
+
+
+
+        game_board.update_table();
+        cout << "Fichas " << game_board.get_player1()->getToken() << "\t|\tLiberadas: " << "\t|\tCapturadas: " << endl;
+        game_board.display_board();
+        cout << "Fichas " << game_board.get_player2()->getToken() << "\t|\tLiberadas: " << "\t|\tCapturadas: " << endl;
+    }while(true);
+
+}

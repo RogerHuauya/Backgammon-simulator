@@ -25,6 +25,11 @@ public:
     string get_username(){
         return username;
     }
+
+    char getToken(){
+        return token_type;
+    }
+
     void set_token_type(char _token_type){
         token_type = _token_type;
     }

@@ -37,6 +37,15 @@ public:
     void set_player2(Player* player){
         player2 = player;
     }
+
+    Player* get_player1(){
+        return player1;
+    }
+
+    Player* get_player2(){
+        return player2;
+    }
+
     void play();
 
     void get_choice();
