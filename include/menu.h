@@ -2,12 +2,13 @@
 // Created by Roger Huauya Mamani on 27/11/22.
 //
 
-#ifndef PROJECT_LAB_MENU_H
-#define PROJECT_LAB_MENU_H
+#ifndef BACKGAMMON_SIMULATOR_MENU_H
+#define BACKGAMMON_SIMULATOR_MENU_H
 #include <string>
-
-using namespace std;
-void menu(){
-    
-};
-#endif //PROJECT_LAB_MENU_H
+#include <iostream>
+#include "player.h"
+void menu();
+void register_player();
+void set_turn();
+void init_game();
+#endif //BACKGAMMON_SIMULATOR_MENU_H

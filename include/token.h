@@ -2,16 +2,20 @@
 // Created by Roger Huauya Mamani on 27/11/22.
 //
 
-#ifndef PROJECT_LAB_TOKEN_H
-#define PROJECT_LAB_TOKEN_H
-:wq:wq
+#ifndef BACKGAMMON_SIMULATOR_TOKEN_H
+#define BACKGAMMON_SIMULATOR_TOKEN_H
+#include <stdio.h>
+#include <iostream>
+#include "constants.h"
+using namespace std;
+
 class Token{
-    int pos[25];
-    bool forward;
+    int position, level;
 public:
-    Token(){
-        memset()
+    Token(int _position, int _level):position(_position),level(_level){}
+    void move_token(int hop, int _level){
+
     }
 
 };
-#endif //PROJECT_LAB_TOKEN_H
+#endif //BACKGAMMON_SIMULATOR_TOKEN_H

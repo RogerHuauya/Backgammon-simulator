@@ -1,6 +1,9 @@
 #include <iostream>
-
+#include "include/menu.h"
+#include "./include/board.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    //menu();
+    Board tablero;
+    tablero.display_board();
     return 0;
 }

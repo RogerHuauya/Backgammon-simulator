@@ -2,18 +2,30 @@
 // Created by Roger Huauya Mamani on 27/11/22.
 //
 
-#ifndef PROJECT_LAB_BOARD_H
-#define PROJECT_LAB_BOARD_H
+#ifndef BACKGAMMON_SIMULATOR_BOARD_H
+#define BACKGAMMON_SIMULATOR_BOARD_H
 #include <vector>
 #include "player.h"
 #include "token.h"
+#include "dice.h"
+#include "constants.h"
+#include <iostream>
+#include <windows.h>
+#define color SetConsoleTextAttribute
 using namespace std;
 class Board{
     Player *player1, *player2;
+    Dice dice1, dice2;
+    vector<string> table;
 public:
-    void display_board(){
-
+    Board(){
+        dice1 = Dice();
+        dice2 = Dice();
     }
+
+    void init_board();
+
+    void display_board();
 
     void set_player1(Player* player){
         player1 = player;
@@ -23,4 +35,4 @@ public:
         player2 = player;
     }
 };
-#endif //PROJECT_LAB_BOARD_H
+#endif //BACKGAMMON_SIMULATOR_BOARD_H
