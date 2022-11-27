@@ -7,36 +7,22 @@ using namespace std;
 
 vector<Player> player_list;
 Board game_board;
-void menu(){
-    int op;
-    cout<<"Main menu\n";
-    cout<<"−−−−−−− BIENVENIDO A BACKGAMMON −−−−−−−"<<endl;
-    cout<<"Seleccione una de las siguientes opciones:"<<endl;
-    cout<<"[1] Registrar Jugador"<<endl;
-    cout<<"[2] Establecer turno"<<endl;
-    cout<<"[3] Iniciar Backgammom"<<endl;
-    cout<<"[0] Salir"<<endl;
-    cout<<"Ingrese la opcion deseada: ";
-    cin>> op;
-    switch(op){
-        case 1:  register_player(); break;
-    }
-};
 
 
 void register_player(){
     string name, password;
     cout<<"Ingrese su usuario: ";
     cin>>name;
-    cout<<"Ingrese su contraseña: ";
+    cout<<"Ingrese su contrasena: ";
     cin>>password;
     cout<<"Usuario "<<name<<" creado exitosamente";
-    player_list.push_back(Player(name, password));
+    player_list.emplace_back(name, password);
 }
 
 void set_turn(){
-    string name,name2, pass2, pass;
+    string name, pass;
     bool ans1 = false;
+    bool ans2 = false;
     cout<<"Jugador 1"<<endl;
     cout<<"Ingrese su usuario: ";
     cin>>name;
@@ -51,7 +37,7 @@ void set_turn(){
         }
     }
     if(!ans1){
-        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario";
+        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario" << endl;
         return;
     }
 
@@ -60,13 +46,17 @@ void set_turn(){
     cin>>name;
     cout<<"Ingrese su contrasena: ";
     cin>>pass;
-    for(int i = 0; i < player_list.size(); i ++){
-        if(player_list[i].get_username() == name) {
-            ans = player_list[i].login(pass);
-            if (ans) {
-                game_board.set_player2(&player_list[i]);
+    for(auto & i : player_list){
+        if(i.get_username() == name) {
+            ans2 = i.login(pass);
+            if (ans2) {
+                game_board.set_player2(&i);
             }
         }
+    }
+    if(!ans2){
+        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario";
+        return;
     }
 
 }
@@ -90,3 +80,40 @@ bool validate_number_of_players(){
 void clear_terminal(){
     system("cls");
 }
+
+
+void menu(){
+    int op;
+    do{
+        cout << "Main menu\n";
+        cout << "−−−−−−− BIENVENIDO A BACKGAMMON −−−−−−−" << endl;
+        cout << "Seleccione una de las siguientes opciones:" << endl;
+        cout << "[1] Registrar Jugador" << endl;
+        cout << "[2] Establecer turno" << endl;
+        cout << "[3] Iniciar Backgammom" << endl;
+        cout << "[0] Salir" << endl;
+        cout << "Ingrese la opcion deseada: ";
+        cin >> op;
+        switch (op) {
+            case 1:
+                register_player();
+                break;
+            case 2:
+                set_turn();
+                break;
+            case 3:
+                /*
+                reset_board();
+
+                update_table();
+
+                display_board();
+                 */
+                break;
+            default:
+                cout << "Opcion no valida" << endl;
+                break;
+        }
+        clear_terminal();
+    }while(op != 0);
+};

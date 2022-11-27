@@ -165,15 +165,16 @@ void Board::play(){
     if(player_turn == 1){
         cout<<"−−−−−Turno de Jugador \""<< player1->get_username() << "\"-----"<<endl;
         get_choice();
-        player1->move_token()
+        player1->move_player_token(1,1);
     }
     else if(player_turn == 2){
         cout<<"−−−−−Turno de Jugador \""<< player2->get_username() << "\"-----"<<endl;
+        player2->move_player_token(1,1);
     }
 }
 
 void Board::get_choice(){
-    cout<<"Dados: " << dice1<<" "<<dice2<<endl;
+    //cout<<"Dados: " << dice1<<" "<<dice2<<endl;
 
 }
 

@@ -3,4 +3,4 @@ project(BACKGAMMON_SIMULATOR)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(BACKGAMMON_SIMULATOR main.cpp include/player.h include/board.h include/token.h include/menu.h include/constants.h include/dice.h src/menu.cpp src/board.cpp src/constants.cpp src/player.cpp)
+add_executable(BACKGAMMON_SIMULATOR main.cpp include/player.h include/board.h include/token.h include/menu.h include/constants.h include/dice.h src/menu.cpp src/board.cpp src/constants.cpp src/player.cpp src/dice.cpp)

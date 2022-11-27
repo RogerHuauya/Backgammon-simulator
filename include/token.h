@@ -13,7 +13,7 @@ class Token{
 protected:
     int position, level;
     bool activate;
-    bool is_token_up = 0;
+    bool is_token_up;
 public:
     Token(int _position, int _level):position(_position),level(_level){
         activate = true;
@@ -34,6 +34,12 @@ public:
     }
     virtual void move_token(int hop, int _level)=0;
     virtual ~Token(){};
+    bool operator<(Token& token) const{
+        if (position == token.get_position()) {
+            return level > token.get_level();
+        }
+        return position < token.get_position();
+    }
 };
 
 class TokenUp:public Token{

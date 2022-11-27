@@ -5,7 +5,8 @@
 #include "../include/player.h"
 #include "../include/token.h"
 
-void Player:: init_token_up(){
+void Player::init_token_up(){
+    /*
     tokens[0] = TokenUp(0,0);
     tokens[1] = TokenUp(0,1);
     tokens[2] = TokenUp(11,0);
@@ -21,10 +22,12 @@ void Player:: init_token_up(){
     tokens[12] = TokenUp(19,2);
     tokens[13] = TokenUp(19,3);
     tokens[14] = TokenUp(19,4);
+     */
 }
 
 
 void Player:: init_token_down(){
+    /*
     tokens[0] = TokenDown(23,0);
     tokens[1] = TokenDown(23,1);
     tokens[2] = TokenDown(12,0);
@@ -40,6 +43,7 @@ void Player:: init_token_down(){
     tokens[12] = TokenDown(5,2);
     tokens[13] = TokenDown(5,3);
     tokens[14] = TokenDown(5,4);
+     */
 }
 
 void Player::init_token(bool ascendent) {
@@ -61,13 +65,13 @@ bool Player::move_player_token(int pos, int value) {
         return false;
     tokens[index].set_position(dest_pos);
     tokens[index].set_level(tokens[dest_index].get_level() + 1);
-    sort(tokens.begin(), tokens.end(), greater<Token>());
+    //sort(tokens.begin(), tokens.end(), greater<Token>());
 
     return true;
 }
 
 int Player::find_token(int pos){
-    sort(tokens.begin(), tokens.end(), greater<Token>());
+    //sort(tokens.begin(), tokens.end(), greater<Token>());
     for(int i = 0; i < tokens.size(); i++){
         if(pos == tokens[i].get_position()){
             return i;
