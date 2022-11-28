@@ -17,10 +17,10 @@ void register_player(){
     cout<<"Ingrese su contrasena: ";
     cin>>password;
     cout<<"Usuario "<<name<<" creado exitosamente";
-    player_list.emplace_back(name, password);
+    player_list.emplace_back(name, password); //Player(name, password)
 }
 
-void set_turn(){
+void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
     string name, pass;
     bool ans1 = false;
     bool ans2 = false;
@@ -29,11 +29,11 @@ void set_turn(){
     cin>>name;
     cout<<"Ingrese su contrasena: ";
     cin>>pass;
-    for(auto & i : player_list){
-        if(i.get_username() == name) {
-            ans1 = i.login(pass);
+    for(auto & player : player_list){
+        if(player.get_username() == name) {
+            ans1 = player.login(pass);
             if (ans1) {
-                game_board.set_player1(&i);
+                game_board.set_player1(&player);
             }
         }
     }
@@ -47,11 +47,11 @@ void set_turn(){
     cin>>name;
     cout<<"Ingrese su contrasena: ";
     cin>>pass;
-    for(auto & i : player_list){
-        if(i.get_username() == name) {
-            ans2 = i.login(pass);
+    for(auto & player : player_list){
+        if(player.get_username() == name) {
+            ans2 = player.login(pass);
             if (ans2) {
-                game_board.set_player2(&i);
+                game_board.set_player2(&player);
             }
         }
     }

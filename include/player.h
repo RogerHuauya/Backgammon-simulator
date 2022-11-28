@@ -14,7 +14,7 @@ using namespace std;
 class Player{
     string username, password;
     char token_type; // X, O
-    vector<Token> tokens;
+    vector<Token> tokens; // Se almacena las fichas del jugador, esto es agrecacion
     bool is_player_up;
 
 public:

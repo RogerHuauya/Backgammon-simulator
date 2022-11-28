@@ -3,6 +3,5 @@
 #include "./include/board.h"
 int main() {
     menu();
-
     return 0;
 }

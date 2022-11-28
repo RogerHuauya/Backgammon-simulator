@@ -21,7 +21,7 @@ public:
         return value;
     };
 
-    friend ostream& operator<<(ostream &os, const Dice& d);
+    friend ostream& operator<<(ostream &os, const Dice& d); // cout << dice;
 };
 
 #endif //BACKGAMMON_SIMULATOR_DICE_H
