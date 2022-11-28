@@ -73,6 +73,7 @@ void init_game(){
             finished = game_board.play(cout, cin);
             game_board.reset_board();
             game_board.update_table();
+            clear_terminal();
         }
 
     } else {

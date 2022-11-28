@@ -13,4 +13,5 @@ void register_player();
 void set_turn();
 void init_game();
 bool validate_number_of_players();
+void clear_terminal();
 #endif //BACKGAMMON_SIMULATOR_MENU_H

@@ -67,7 +67,13 @@ bool Player::move_player_token(int pos, int value) {
         cout<< "index not valid";
         return false;
     }
-    int dest_pos = tokens[index].get_position() + value;
+    int dest_pos;
+    if(is_player_up) {
+        dest_pos = tokens[index].get_position() + value;
+    }
+    else{
+        dest_pos = tokens[index].get_position() - value;
+    }
     int dest_index = find_token(dest_pos);
     if (tokens[dest_index].get_level() == STACK_MAX_LENGTH){
         cout<< "Can't place token on it";
