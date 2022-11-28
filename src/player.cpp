@@ -64,7 +64,7 @@ bool comp(Token* a, Token* b){
 bool Player::move_player_token(int pos, int value) {
     int index = find_token(pos);
     if(index < 0) {
-        cout<< "index not valid";
+        cout<< "There is no token in the position selected"<<endl;
         return false;
     }
     int dest_pos;
@@ -75,8 +75,10 @@ bool Player::move_player_token(int pos, int value) {
         dest_pos = tokens[index]->get_position() - value;
     }
     int dest_index = find_token(dest_pos);
-    if (tokens[dest_index]->get_level() == STACK_MAX_LENGTH){
-        cout<< "Can't place token on it";
+
+    if (tokens[dest_index]->get_level() == STACK_MAX_LENGTH - 1){
+        cout<< "Can't place token on it, full";
+
         return false;
     }
     if(dest_index == -1){

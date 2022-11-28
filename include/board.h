@@ -17,12 +17,13 @@ class Board{
     Player *player1, *player2;
     Dice dice1, dice2;
     vector<string> table;
-    int player_turn = 1;
+    int player_turn = 1; // a quien le toca
 public:
     Board(){
         for(int i = 0; i < COLUMNS_SIZE; i++){
             table.emplace_back("     ");
         }
+        // Composition
         dice1 = Dice();
         dice2 = Dice();
     }

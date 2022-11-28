@@ -10,7 +10,7 @@
 #include "board.h"
 void menu();
 void register_player();
-void set_turn();
+void set_turn();// Aqui se produce la asociacion de player 1 y player 2
 void init_game();
 bool validate_number_of_players();
 void clear_terminal();
