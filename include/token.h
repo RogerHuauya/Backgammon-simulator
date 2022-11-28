@@ -12,12 +12,11 @@ using namespace std;
 class Token {
 protected:
     int position, level;
-    bool activate;
-    bool is_token_up;
+    bool activate = true;
+    bool ascendent;
+    string token_type;
 public:
-    Token(int _position, int _level) : position(_position), level(_level) {
-        activate = true;
-    }
+    Token(int _position, int _level, string token_type) : position(_position), level(_level),token_type(token_type) {}
 
     void set_position(int pos) {
         position = pos;
@@ -27,35 +26,27 @@ public:
         level = lev;
     }
 
-    int get_position(){
-        return position;
-    }
+    virtual int get_position() = 0;
 
-    bool get_activate(){
-        return true;
-    }
+    virtual bool get_activate()=0;
 
-    int get_level(){
-        return level;
-    }
+    virtual int get_level()=0;
 
-    bool get_token_type() {
-        return is_token_up;
-    }
+    virtual string get_token_type() =0;
 
-    void move_token(int hop, int _level);
+    virtual void move_token(int hop, int _level) = 0;
 
-    friend bool comp(Token a, Token b);
+    friend bool comp(Token* a, Token* b);
     ~Token() {};
 
 };
 
 
-/*
+
 class TokenUp:public Token{
 public:
-    TokenUp(int pos, int lvl): Token(pos,lvl){
-        is_token_up = true;
+    TokenUp(int pos, int lvl, string token): Token(pos,lvl,token){
+        ascendent = true;
     }
     void move_token(int hop, int _level){
         position += hop;
@@ -67,6 +58,10 @@ public:
 
     int get_level(){
         return level;
+    }
+
+    string get_token_type(){
+        return token_type;
     }
 
     bool get_activate(){
@@ -83,9 +78,10 @@ public:
 
 class TokenDown:public Token{
 public:
-    TokenDown(int pos, int lvl): Token(pos,lvl){
-        bool is_token_up = 1;
+    TokenDown(int pos, int lvl,string token): Token(pos,lvl,token){
+        ascendent = false;
     }
+
     void move_token(int hop, int _level){
         position -= hop;
         level = _level;
@@ -95,6 +91,9 @@ public:
         return position;
     }
 
+    string get_token_type(){
+        return token_type;
+    }
     int get_level(){
         return level;
     }
@@ -110,5 +109,5 @@ public:
         return position < token.position;
     }
 };
- */
+
 #endif //BACKGAMMON_SIMULATOR_TOKEN_H

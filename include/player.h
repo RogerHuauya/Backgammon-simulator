@@ -13,8 +13,8 @@ using namespace std;
 
 class Player{
     string username, password;
-    char token_type; // X, O
-    vector<Token> tokens;
+    string token_type; // X, O
+    vector<Token*> tokens;
     bool is_player_up;
 
 public:
@@ -26,7 +26,7 @@ public:
         return username;
     }
 
-    char getToken(){
+    string getToken() const{
         return token_type;
     }
 
@@ -34,7 +34,7 @@ public:
         token_type = _token_type;
     }
 
-    bool get_is_player_up(){
+    bool get_is_player_up() const{
         return is_player_up;
     }
 
@@ -52,9 +52,9 @@ public:
 
     void init_token(bool ascendent);
 
-    void init_token_up();
+    void init_token_up(string x);
 
-    void init_token_down();
+    void init_token_down(string x);
 
     int find_token(int pos);
 

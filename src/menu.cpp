@@ -16,7 +16,7 @@ void register_player(){
     cin>>name;
     cout<<"Ingrese su contrasena: ";
     cin>>password;
-    cout<<"Usuario "<<name<<" creado exitosamente";
+    cout<<"Usuario "<<name<<" creado exitosamente" << endl;
     player_list.emplace_back(name, password);
 }
 
@@ -39,9 +39,11 @@ void set_turn(){
     }
     if(!ans1){
         cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario" << endl;
+        game_board.set_player1(nullptr);
+        game_board.set_player2(nullptr);
         return;
     }
-
+    name = ""; pass = "";
     cout<<"Jugador 2"<<endl;
     cout<<"Ingrese su usuario: ";
     cin>>name;
@@ -57,9 +59,35 @@ void set_turn(){
     }
     if(!ans2){
         cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario";
+        game_board.set_player2(nullptr);
+        game_board.set_player1(nullptr);
         return;
     }
 
+    int d1,d2,d3,d4;
+    d1 = rand()%6+1;
+    d2 = rand()%6+1;
+    d3 = rand()%6+1;
+    d4 = rand()%6+1;
+    string ficha1, ficha2;
+    cout << "Dados para \"" << game_board.get_player1()->get_username() << "\": "<< d1 << ", " << d2 << endl;
+    cout << "Dados para \"" << game_board.get_player2()->get_username() << "\": "<< d3 << ", " << d4 << endl;
+    if ((d1+d2)>=(d3+d4)) {
+        cout << "El jugador \"" << game_board.get_player1()->get_username() << "\" elige la ficha [X u O]: ";
+        cin >> ficha1;
+        if(ficha1=="X"){ficha2="O";}
+        else if (ficha1 ==  "O"){ficha2 =  "X";}
+    }else{
+        cout << "El jugador \"" << game_board.get_player2()->get_username() << "\" elige la ficha [X u O]: ";
+        cin >> ficha2;
+        if(ficha2== "X"){ficha1= "O";}
+        else if (ficha2 ==  "O"){ficha1 =  "X";}
+    }
+    game_board.get_player1()->set_token_type(ficha1[0]);
+    game_board.get_player2()->set_token_type(ficha2[0]);
+
+    cout << "Jugador \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha " << game_board.get_player1()->getToken()<<endl;
+    cout << "Jugador \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha " << game_board.get_player2()->getToken()<<endl;
 }
 
 void init_game(){
@@ -118,11 +146,13 @@ void menu(){
             case 3:
                 init_game();
                 break;
+            case 0:
+                cout << "Gracias por jugar Bagamon" << endl;
             default:
                 cout << "Opcion no valida" << endl;
                 break;
         }
-        clear_terminal();
+        //clear_terminal();
     }while(op != 0);
 
 

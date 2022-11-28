@@ -21,7 +21,7 @@ class Board{
 public:
     Board(){
         for(int i = 0; i < COLUMNS_SIZE; i++){
-            table.push_back("     ");
+            table.emplace_back("     ");
         }
         dice1 = Dice();
         dice2 = Dice();

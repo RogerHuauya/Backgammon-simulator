@@ -12,14 +12,14 @@ void Board::reset_board() {
 
 void Board::update_table() {
     for(auto& token: player1->tokens){
-        if(token.get_position() > -1 && token.get_position() < COLUMNS_SIZE) {
-            table[token.get_position()][token.get_level()] = player1->token_type;
+        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE) {
+            table[token->get_position()][token->get_level()] = player1->token_type[0];
         }
     }
 
     for(auto& token: player2->tokens){
-        if(token.get_position() > -1 && token.get_position() < COLUMNS_SIZE) {
-            table[token.get_position()][token.get_level()] = player2->token_type;
+        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE) {
+            table[token->get_position()][token->get_level()] = player2->token_type[0];
         }
     }
 
@@ -170,12 +170,12 @@ bool Board::play(ostream &os, istream &in){
     dice1.roll_dice();
     dice2.roll_dice();
     if(player_turn == 1){
-        os<<"−−−−− Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
+        os<<" −−−−− Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
         play_choices(in);
         player_turn = 2;
     }
     else if(player_turn == 2){
-        os<<"−−−−− Turno de Jugador \""<< player2->get_username() << "\" -----"<<endl;
+        os<<" −−−−− Turno de Jugador \""<< player2->get_username() << "\" -----"<<endl;
         play_choices(in);
         player_turn = 1;
     }
