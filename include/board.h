@@ -17,9 +17,12 @@ class Board{
     Player *player1, *player2;
     Dice dice1, dice2;
     vector<string> table;
-    int player_turn = 0;
+    int player_turn = 1;
 public:
     Board(){
+        for(int i = 0; i < COLUMNS_SIZE; i++){
+            table.push_back("     ");
+        }
         dice1 = Dice();
         dice2 = Dice();
     }
@@ -29,6 +32,8 @@ public:
     void update_table();
 
     void display_board();
+
+    void init_players();
 
     void set_player1(Player* player){
         player1 = player;
@@ -46,9 +51,9 @@ public:
         return player2;
     }
 
-    void play();
+    bool play(ostream& os, istream& in);
 
-    void get_choice();
+    void play_choices(istream& in);
 
     friend class Player;
 };

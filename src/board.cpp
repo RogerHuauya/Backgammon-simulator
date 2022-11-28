@@ -5,8 +5,8 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
 void Board::reset_board() {
-    for(int i = 0; i < COLUMNS_SIZE; i++){
-        table[i] = "     ";
+    for(auto & i : table){
+        i = "     ";
     }
 }
 
@@ -154,25 +154,82 @@ void Board::display_board(){
 
 }
 
-void Board::play(){
+void Board::init_players(){
+    player1->init_token(true);
+    player1->set_token_type('X');
+    player2->init_token(false);
+    player1->set_token_type('O');
+
+}
+
+bool Board::play(ostream &os, istream &in){
+    int a;
     dice1.roll_dice();
     dice2.roll_dice();
     if(player_turn == 1){
-        cout<<"−−−−−Turno de Jugador \""<< player1->get_username() << "\"-----"<<endl;
-        get_choice();
-        player1->move_player_token(1,1);
+        os<<"−−−−−Turno de Jugador \""<< player1->get_username() << "\"-----"<<endl;
+        play_choices(in);
+        player_turn = 2;
     }
     else if(player_turn == 2){
-        cout<<"−−−−−Turno de Jugador \""<< player2->get_username() << "\"-----"<<endl;
-        player2->move_player_token(1,1);
+        os<<"−−−−−Turno de Jugador \""<< player2->get_username() << "\"-----"<<endl;
+        play_choices(in);
+        player_turn = 1;
     }
+    return false;
 }
 ostream& operator<<(ostream &os, const Dice& d){
     os << d.value;
     return os;
 }
-void Board::get_choice(){
-    cout<<"Dados: " << dice1<<" "<<dice2<<endl;
+void Board::play_choices(istream& in){
+    cout<<"Dados: " << dice1 <<", "<< dice2<<endl;
+    int turns, pos;
+    if(dice1.get_value() == dice2.get_value()) turns = 2;
+    else turns = 1;
+
+    for(int i = 0; i < turns; i++) {
+        if (player_turn == 1) {
+            bool result = false;
+            while (!result) {
+                cout << "Posicion de ficha a mover " << dice1 << " posiciones [1-24]: ";
+                in >> pos;
+                result = player1->move_player_token(pos, dice1.get_value());
+                if(!result){
+                    cout<< "Jugada invalida, intente nuevamente"<<endl;
+                }
+            }
+            result = false;
+            while (!result) {
+                cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
+                in >> pos;
+                result = player1->move_player_token(pos, dice2.get_value());
+                if(!result){
+                    cout<< "Jugada invalida, intente nuevamente"<<endl;
+                }
+            }
+
+        } else {
+            bool result = false;
+            while (!result) {
+                cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
+                in >> pos;
+                result = player2->move_player_token(pos, dice2.get_value());
+                if(!result){
+                    cout<< "Jugada invalida, intente nuevamente"<<endl;
+                }
+            }
+            result = false;
+            while (!result) {
+                cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
+                in >> pos;
+                result = player2->move_player_token(pos, dice2.get_value());
+                if(!result){
+                    cout<< "Jugada invalida, intente nuevamente"<<endl;
+                }
+            }
+        }
+    }
 }
 
 

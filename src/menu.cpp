@@ -7,6 +7,7 @@ using namespace std;
 
 vector<Player> player_list;
 Board game_board;
+int op;
 
 
 void register_player(){
@@ -63,17 +64,31 @@ void set_turn(){
 
 void init_game(){
     if(validate_number_of_players()){
-        register_player();
-        cout<<"Dados para Jugador 1: "<<endl;
-    } else {cout<<"Regresar al menu";}
+        game_board.set_player1(&player_list[0]);
+        game_board.set_player1(&player_list[1]);
+        game_board.reset_board();
+        game_board.update_table();
+        game_board.init_players();
+        bool finished = false;
+        while(!finished) {
+            game_board.display_board();
+            finished = game_board.play(cout, cin);
+            game_board.update_table();
+        }
+
+    } else {
+        cout<<"Numero de usuarios menor a 2";
+    }
+
+
 }
 
 bool validate_number_of_players(){
     if(player_list.size()<2){
-        return true;
+        return false;
     }
     else{
-        return false;
+        return true;
     }
 }
 
@@ -83,7 +98,6 @@ void clear_terminal(){
 
 
 void menu(){
-    int op;
     do{
         cout << "Main menu\n";
         cout << "------ BIENVENIDO A BACKGAMMON ------" << endl;
@@ -102,23 +116,7 @@ void menu(){
                 set_turn();
                 break;
             case 3:
-                game_board.set_player1(&player_list[0]);
-                game_board.set_player1(&player_list[1]);
-                cout << "El turno del juego es el siguiente" << endl;
-                cout << "1. El jugador  \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha"
-                << "\"" << game_board.get_player1()->getToken() << endl;
-
-                cout << "2. El jugador  \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha"
-                     << "\"" << game_board.get_player2()->getToken() << endl;
-
-
-                game_board.reset_board();
-
-                game_board.update_table();
-
-                game_board.display_board();
-
-                op = 0;
+                init_game();
                 break;
             default:
                 cout << "Opcion no valida" << endl;
@@ -127,15 +125,5 @@ void menu(){
         clear_terminal();
     }while(op != 0);
 
-
-    do{
-
-
-
-        game_board.update_table();
-        cout << "Fichas " << game_board.get_player1()->getToken() << "\t|\tLiberadas: " << "\t|\tCapturadas: " << endl;
-        game_board.display_board();
-        cout << "Fichas " << game_board.get_player2()->getToken() << "\t|\tLiberadas: " << "\t|\tCapturadas: " << endl;
-    }while(true);
 
 }

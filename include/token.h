@@ -27,22 +27,31 @@ public:
         level = lev;
     }
 
-    virtual int get_position() = 0;
+    int get_position(){
+        return position;
+    }
 
-    virtual bool get_activate() = 0;
+    bool get_activate(){
+        return activate;
+    }
 
-    virtual int get_level() = 0;
+    int get_level(){
+        return level;
+    }
 
     bool get_token_type() {
         return is_token_up;
     }
 
-    virtual void move_token(int hop, int _level) = 0;
+    void move_token(int hop, int _level);
 
-    virtual ~Token() {};
+    friend bool comp(Token a, Token b);
+    ~Token() {};
 
 };
 
+
+/*
 class TokenUp:public Token{
 public:
     TokenUp(int pos, int lvl): Token(pos,lvl){
@@ -101,4 +110,5 @@ public:
         return position < token.position;
     }
 };
+ */
 #endif //BACKGAMMON_SIMULATOR_TOKEN_H
