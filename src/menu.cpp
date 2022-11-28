@@ -64,15 +64,14 @@ void set_turn(){
 
 void init_game(){
     if(validate_number_of_players()){
-        game_board.set_player1(&player_list[0]);
-        game_board.set_player1(&player_list[1]);
         game_board.reset_board();
-        game_board.update_table();
         game_board.init_players();
+        game_board.update_table();
         bool finished = false;
         while(!finished) {
             game_board.display_board();
             finished = game_board.play(cout, cin);
+            game_board.reset_board();
             game_board.update_table();
         }
 

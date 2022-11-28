@@ -12,13 +12,13 @@ void Board::reset_board() {
 
 void Board::update_table() {
     for(auto& token: player1->tokens){
-        if(token.get_activate()) {
+        if(token.get_position() > -1 && token.get_position() < COLUMNS_SIZE) {
             table[token.get_position()][token.get_level()] = player1->token_type;
         }
     }
 
     for(auto& token: player2->tokens){
-        if(token.get_activate()) {
+        if(token.get_position() > -1 && token.get_position() < COLUMNS_SIZE) {
             table[token.get_position()][token.get_level()] = player2->token_type;
         }
     }
@@ -158,7 +158,7 @@ void Board::init_players(){
     player1->init_token(true);
     player1->set_token_type('X');
     player2->init_token(false);
-    player1->set_token_type('O');
+    player2->set_token_type('O');
 
 }
 
@@ -194,6 +194,7 @@ void Board::play_choices(istream& in){
             while (!result) {
                 cout << "Posicion de ficha a mover " << dice1 << " posiciones [1-24]: ";
                 in >> pos;
+                pos--;
                 result = player1->move_player_token(pos, dice1.get_value());
                 if(!result){
                     cout<< "Jugada invalida, intente nuevamente"<<endl;
@@ -203,6 +204,7 @@ void Board::play_choices(istream& in){
             while (!result) {
                 cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
                 in >> pos;
+                pos--;
                 result = player1->move_player_token(pos, dice2.get_value());
                 if(!result){
                     cout<< "Jugada invalida, intente nuevamente"<<endl;
@@ -214,6 +216,7 @@ void Board::play_choices(istream& in){
             while (!result) {
                 cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
                 in >> pos;
+                pos--;
                 result = player2->move_player_token(pos, dice2.get_value());
                 if(!result){
                     cout<< "Jugada invalida, intente nuevamente"<<endl;
@@ -223,6 +226,7 @@ void Board::play_choices(istream& in){
             while (!result) {
                 cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
                 in >> pos;
+                pos--;
                 result = player2->move_player_token(pos, dice2.get_value());
                 if(!result){
                     cout<< "Jugada invalida, intente nuevamente"<<endl;

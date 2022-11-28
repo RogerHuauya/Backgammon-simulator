@@ -32,7 +32,7 @@ public:
     }
 
     bool get_activate(){
-        return activate;
+        return true;
     }
 
     int get_level(){

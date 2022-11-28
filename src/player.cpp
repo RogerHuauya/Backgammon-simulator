@@ -63,13 +63,24 @@ bool comp(Token a, Token b){
 
 bool Player::move_player_token(int pos, int value) {
     int index = find_token(pos);
-    if(index < 0) return false;
+    if(index < 0) {
+        cout<< "index not valid";
+        return false;
+    }
     int dest_pos = tokens[index].get_position() + value;
     int dest_index = find_token(dest_pos);
-    if (tokens[dest_index].get_level() == STACK_MAX_LENGTH || tokens[dest_index].get_token_type() != is_player_up)
+    if (tokens[dest_index].get_level() == STACK_MAX_LENGTH){
+        cout<< "Can't place token on it";
         return false;
-    tokens[index].set_position(dest_pos);
-    tokens[index].set_level(tokens[dest_index].get_level() + 1);
+    }
+    if(dest_index == -1){
+        tokens[index].set_position(dest_pos);
+        tokens[index].set_level(0);
+    }
+    else {
+        tokens[index].set_position(dest_pos);
+        tokens[index].set_level(tokens[dest_index].get_level() + 1);
+    }
     sort(tokens.begin(), tokens.end(), comp);
 
     return true;

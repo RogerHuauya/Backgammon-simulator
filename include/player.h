@@ -34,6 +34,10 @@ public:
         token_type = _token_type;
     }
 
+    bool get_is_player_up(){
+        return is_player_up;
+    }
+
     bool login(string pass){
         // ver si coincide el password
         if(pass== password){
