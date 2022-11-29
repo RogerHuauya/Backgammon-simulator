@@ -10,6 +10,7 @@ void Board::reset_board() {
     }
 }
 
+
 void Board::update_table() {
     for(auto& token: player1->tokens){
 
@@ -27,10 +28,12 @@ void Board::update_table() {
 
 }
 
+
 void Board::roll_dices(){
     dice1.roll_dice();
     dice2.roll_dice();
 }
+
 
 void Board::display_board(){
     color(hConsole,12);
@@ -163,6 +166,7 @@ void Board::display_board(){
 
 }
 
+
 void Board::init_players(){
     player1->init_token(true);
     player1->set_token_type('X');
@@ -170,6 +174,7 @@ void Board::init_players(){
     player2->set_token_type('O');
 
 }
+
 
 bool Board::play(ostream &os, istream &in){
     this->roll_dices();
@@ -186,6 +191,7 @@ bool Board::play(ostream &os, istream &in){
     }
     return false;
 }
+
 
 void Board::play_choices(istream& in){
     cout<<"Dados: " << dice1 <<", "<< dice2<<endl;
