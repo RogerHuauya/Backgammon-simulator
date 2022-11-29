@@ -59,5 +59,9 @@ public:
     void play_choices(istream& in);
 
     friend class Player;
+
+    int get_dice1_value();
+
+    int get_dice2_value();
 };
 #endif //BACKGAMMON_SIMULATOR_BOARD_H

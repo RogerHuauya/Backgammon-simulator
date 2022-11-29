@@ -67,14 +67,18 @@ void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
     }
 
     int d1,d2,d3,d4;
-    d1 = rand()%6+1;
-    d2 = rand()%6+1;
-    d3 = rand()%6+1;
-    d4 = rand()%6+1;
     string ficha1, ficha2;
 
+    game_board.roll_dices();
+    d1 = game_board.get_dice1_value();
+    d2 = game_board.get_dice2_value();
     cout << "Dados para \"" << game_board.get_player1()->get_username() << "\": "<< d1 << ", " << d2 << endl;
+
+    game_board.roll_dices();
+    d3 = game_board.get_dice1_value();
+    d4 = game_board.get_dice2_value();
     cout << "Dados para \"" << game_board.get_player2()->get_username() << "\": "<< d3 << ", " << d4 << endl;
+
     if ((d1+d2)>=(d3+d4)) {
         cout << "El jugador \"" << game_board.get_player1()->get_username() << "\" elige la ficha [X u O]: ";
         cin >> ficha1;

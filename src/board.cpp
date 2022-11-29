@@ -175,12 +175,12 @@ bool Board::play(ostream &os, istream &in){
     this->roll_dices();
 
     if(player_turn == 1){
-        os<<" −−−−− Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
+        os<<"----- Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
         play_choices(in);
         player_turn = 2;
     }
     else if(player_turn == 2){
-        os<<" −−−−− Turno de Jugador \""<< player2->get_username() << "\" -----"<<endl;
+        os<<"----- Turno de Jugador \""<< player2->get_username() << "\" -----"<<endl;
         play_choices(in);
         player_turn = 1;
     }
@@ -258,6 +258,14 @@ void Board::play_choices(istream& in){
 }
 
 
+int Board::get_dice1_value(){
+    return dice1.get_value();
+}
+
+
+int Board::get_dice2_value(){
+    return dice2.get_value();
+}
 
 
 
