@@ -61,6 +61,16 @@ public:
     friend class Board;
 
     ~Player();
+
+    int get_token_level(int pos);
+
+    int find_token_with_step(int pos, int step);
+
+    int get_token_level_with_step(int pos, int step);
+
+    void capture_token(int pos);
+
+    void capture_token(int pos, int step);
 };
 
 #endif //BACKGAMMON_SIMULATOR_PLAYER_H

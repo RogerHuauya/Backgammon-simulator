@@ -56,13 +56,19 @@ void Player::init_token(bool ascendent) {
 }
 
 
-bool comp(Token* a, Token* b){
+bool comp_asc(Token* a, Token* b){
     if (a->position == b->position) {
         return a->level > b->level;
     }
     return a->position < b->position;
 }
 
+bool comp_desc(Token* a, Token* b){
+    if (a->position == b->position) {
+        return a->level > b->level;
+    }
+    return a->position > b->position;
+}
 
 bool Player::move_player_token(int pos, int value) {
     int index = find_token(pos);
@@ -80,7 +86,7 @@ bool Player::move_player_token(int pos, int value) {
     int dest_index = find_token(dest_pos);
     if(dest_index>=0) {
         if (tokens[dest_index]->get_level() == STACK_MAX_LENGTH - 1) {
-            cout << "Can't place token on it, full";
+            cout << "Can't place token on it, it is full" << endl;
 
             return false;
         }
@@ -93,14 +99,21 @@ bool Player::move_player_token(int pos, int value) {
         tokens[index]->set_position(dest_pos);
         tokens[index]->set_level(tokens[dest_index]->get_level() + 1);
     }
-    sort(tokens.begin(), tokens.end(), comp);
+    if(is_player_up)
+        sort(tokens.begin(), tokens.end(), comp_asc);
+    else
+        sort(tokens.begin(), tokens.end(), comp_desc);
 
     return true;
 }
 
 
 int Player::find_token(int pos){
-    sort(tokens.begin(), tokens.end(), comp);
+    if(is_player_up)
+        sort(tokens.begin(), tokens.end(), comp_asc);
+    else
+        sort(tokens.begin(), tokens.end(), comp_desc);
+
     for(int i = 0; i < tokens.size(); i++){
         if(pos == tokens[i]->get_position()){
             return i;
@@ -109,6 +122,57 @@ int Player::find_token(int pos){
     return -1;
 }
 
+int Player::find_token_with_step(int pos, int step){
+    if(is_player_up) {
+        sort(tokens.begin(), tokens.end(), comp_asc);
+        pos -= step;
+    }
+    else {
+        sort(tokens.begin(), tokens.end(), comp_desc);
+        pos += step;
+    }
+    for(int i = 0; i < tokens.size(); i++){
+        if(pos == tokens[i]->get_position()){
+            return i;
+        }
+    }
+    return -1;
+}
+
+int Player::get_token_level_with_step(int pos, int step){
+    if(is_player_up) {
+        pos -= step;
+    }
+    else {
+        pos += step;
+    }
+    int idx = find_token(pos);
+    return tokens[idx]->get_level();
+}
+
+void Player::capture_token(int pos, int step){
+    int reset_pos;
+    if(is_player_up) {
+        reset_pos = 0;
+        pos -= step;
+    }
+    else{
+        pos += step;
+        reset_pos = COLUMNS_SIZE - 1;
+    }
+    pos = find_token(pos);
+
+    int idx = find_token(0);
+    if(idx < 0) {
+        tokens[pos]->set_position(reset_pos);
+        tokens[pos]->set_level(0);
+    }
+    else{
+        tokens[pos]->set_position(reset_pos);
+        tokens[pos]->set_level(tokens[idx]->get_level() + 1);
+    }
+
+}
 
 Player::~Player(){
     for(auto& x:tokens){

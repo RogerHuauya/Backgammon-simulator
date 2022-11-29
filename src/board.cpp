@@ -37,7 +37,7 @@ void Board::roll_dices(){
 
 void Board::display_board(){
     color(hConsole,12);
-    cout << "\t\t\tFichas O\tLiberadas: 0\tCapturadas: 0\n";
+    cout << "\t\t\tFichas X\tLiberadas: 0\tCapturadas: 0\n";
     //Impresion de los números
     color(hConsole,14);
     std::cout << DIVISION_LINE << "\n";
@@ -167,25 +167,16 @@ void Board::display_board(){
 }
 
 
-void Board::init_players(){
-    player1->init_token(true);
-    player1->set_token_type('X');
-    player2->init_token(false);
-    player2->set_token_type('O');
-
-}
-
-
 bool Board::play(ostream &os, istream &in){
     this->roll_dices();
 
     if(player_turn == 1){
-        os<<"----- Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
+        os<<"----- Turno de Jugador 1: \""<< player1->get_username() << "\" ("<<player1->get_token_type() << ") -----"<<endl;
         play_choices(in);
         player_turn = 2;
     }
     else if(player_turn == 2){
-        os<<"----- Turno de Jugador \""<< player2->get_username() << "\" -----"<<endl;
+        os<<"----- Turno de Jugador 2: \""<< player2->get_username() << "\" ("<<player2->get_token_type() << ") -----"<<endl;
         play_choices(in);
         player_turn = 1;
     }
@@ -206,9 +197,16 @@ void Board::play_choices(istream& in){
                 cout << "Posicion de ficha a mover " << dice1 << " posiciones [1-24]: ";
                 in >> pos;
                 pos--;
-                if(player2->find_token(pos + dice1.get_value()) != -1) {
-                    cout<< "Jugada invalida, ficha enemiga en el destino, intente nuevamente"<<endl;
-                    continue;
+                if(player2->find_token_with_step(pos, dice1.get_value()) != -1) {
+                    if(player2->get_token_level_with_step(pos, dice1.get_value()) > 0) {
+                        cout << "Jugada invalida, hay mas de una ficha enemiga en el destino, intente nuevamente"
+                             << endl;
+                        continue;
+                    }
+                    else{
+                        cout << "Hay una ficha enemiga, capturando ... "<<endl;
+                        player2->capture_token(pos, dice1.get_value());
+                    }
                 }
                 result = player1->move_player_token(pos, dice1.get_value());
                 if(!result){
@@ -220,9 +218,16 @@ void Board::play_choices(istream& in){
                 cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
                 in >> pos;
                 pos--;
-                if(player2->find_token(pos + dice1.get_value()) != -1) {
-                    cout<< "Jugada invalida, ficha enemiga en el destino, intente nuevamente"<<endl;
-                    continue;
+                if(player2->find_token_with_step(pos, dice2.get_value()) != -1) {
+                    if(player2->get_token_level_with_step(pos, dice2.get_value()) > 0) {
+                        cout << "Jugada invalida, hay mas de una ficha enemiga en el destino, intente nuevamente"
+                             << endl;
+                        continue;
+                    }
+                    else{
+                        cout << "Hay una ficha enemiga, capturando ... "<<endl;
+                        player2->capture_token(pos, dice2.get_value());
+                    }
                 }
                 result = player1->move_player_token(pos, dice2.get_value());
                 if(!result){
@@ -236,9 +241,16 @@ void Board::play_choices(istream& in){
                 cout << "Posicion de ficha a mover " << dice1 << " posiciones [1-24]: ";
                 in >> pos;
                 pos--;
-                if(player1->find_token(pos - dice1.get_value()) != -1) {
-                    cout<< "Jugada invalida, ficha enemiga en el destino, intente nuevamente"<<endl;
-                    continue;
+                if(player1->find_token_with_step(pos, dice1.get_value()) != -1) {
+                    if(player1->get_token_level_with_step(pos, dice1.get_value()) > 0) {
+                        cout << "Jugada invalida, hay mas de una ficha enemiga en el destino, intente nuevamente"
+                             << endl;
+                        continue;
+                    }
+                    else{
+                        cout << "Hay una ficha enemiga, capturando ... "<<endl;
+                        player1->capture_token(pos, dice1.get_value());
+                    }
                 }
                 result = player2->move_player_token(pos, dice1.get_value());
                 if(!result){
@@ -250,9 +262,16 @@ void Board::play_choices(istream& in){
                 cout << "Posicion de ficha a mover " << dice2 << " posiciones [1-24]: ";
                 in >> pos;
                 pos--;
-                if(player1->find_token(pos - dice1.get_value()) != -1) {
-                    cout<< "Jugada invalida, ficha enemiga en el destino, intente nuevamente"<<endl;
-                    continue;
+                if(player1->find_token_with_step(pos, dice2.get_value()) != -1) {
+                    if(player1->get_token_level_with_step(pos, dice2.get_value()) > 0) {
+                        cout << "Jugada invalida, hay mas de una ficha enemiga en el destino, intente nuevamente"
+                             << endl;
+                        continue;
+                    }
+                    else{
+                        cout << "Hay una ficha enemiga, capturando ... "<<endl;
+                        player1->capture_token(pos, dice2.get_value());
+                    }
                 }
                 result = player2->move_player_token(pos, dice2.get_value());
                 if(!result){

@@ -36,7 +36,10 @@ public:
 
     virtual void move_token(int hop, int _level) = 0;
 
-    friend bool comp(Token* a, Token* b);
+    friend bool comp_asc(Token* a, Token* b);
+
+    friend bool comp_desc(Token* a, Token* b);
+
     ~Token() {}
 
 };

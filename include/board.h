@@ -36,8 +36,6 @@ public:
 
     void display_board();
 
-    void init_players();
-
     void set_player1(Player* player){
         player1 = player;
     }
