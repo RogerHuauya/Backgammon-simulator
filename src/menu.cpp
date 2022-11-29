@@ -84,26 +84,31 @@ void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
         cin >> ficha1;
         if(ficha1=="X"){ficha2="O";}
         else if (ficha1 ==  "O"){ficha2 =  "X";}
-    }else{
+    } else{
         cout << "El jugador \"" << game_board.get_player2()->get_username() << "\" elige la ficha [X u O]: ";
         cin >> ficha2;
         if(ficha2== "X"){ficha1= "O";}
         else if (ficha2 ==  "O"){ficha1 =  "X";}
     }
     game_board.get_player1()->set_token_type(ficha1[0]);
+    game_board.get_player1()->init_token(ficha1[0] == 'X');
+
     game_board.get_player2()->set_token_type(ficha2[0]);
+    game_board.get_player2()->init_token(ficha2[0] == 'X');
 
     cout << "Jugador \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha ";
     cout << game_board.get_player1()->get_token_type()<<endl;
 
     cout << "Jugador \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha ";
     cout << game_board.get_player2()->get_token_type()<<endl;
+
+    system("pause");
 }
 
 void init_game(){
+    clear_terminal();
     if(validate_number_of_players()){
         game_board.reset_board();
-        game_board.init_players();
         game_board.update_table();
         bool finished = false;
         while(!finished) {
@@ -137,6 +142,7 @@ void clear_terminal(){
 
 void menu(){
     do{
+        clear_terminal();
         cout << "Main menu\n";
         cout << "------ BIENVENIDO A BACKGAMMON ------" << endl;
         cout << "Seleccione una de las siguientes opciones:" << endl;
@@ -162,7 +168,6 @@ void menu(){
                 cout << "Opcion no valida" << endl;
                 break;
         }
-        clear_terminal();
     }while(op != 0);
 
 
