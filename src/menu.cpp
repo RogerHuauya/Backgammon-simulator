@@ -17,7 +17,7 @@ void register_player(){
     cout<<"Ingrese su contrasena: ";
     cin>>password;
 
-    cout<<"Usuario "<<name<<" creado exitosamente";
+    cout<<"Usuario "<<name<<" creado exitosamente"<<endl;
     player_list.emplace_back(name, password); //Player(name, password)
 
 }
@@ -103,14 +103,12 @@ void init_game(){
             finished = game_board.play(cout, cin);
             game_board.reset_board();
             game_board.update_table();
-            clear_terminal();
+            //clear_terminal();
         }
 
     } else {
         cout<<"Numero de usuarios menor a 2";
     }
-
-
 }
 
 bool validate_number_of_players(){
@@ -121,11 +119,11 @@ bool validate_number_of_players(){
         return true;
     }
 }
-
+/*
 void clear_terminal(){
     system("cls");
 }
-
+*/
 
 void menu(){
     do{

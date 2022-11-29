@@ -37,7 +37,7 @@ public:
     virtual void move_token(int hop, int _level) = 0;
 
     friend bool comp(Token* a, Token* b);
-    ~Token() {};
+    ~Token() {}
 
 };
 
@@ -74,6 +74,7 @@ public:
         }
         return position < token.get_position();
     }
+
 };
 
 class TokenDown:public Token{

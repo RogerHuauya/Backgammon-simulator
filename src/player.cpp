@@ -17,11 +17,11 @@ void Player::init_token_up(string x){
     tokens.push_back(new TokenUp(16,0,x));
     tokens.push_back(new TokenUp(16,1,x));
     tokens.push_back(new TokenUp(16,2,x));
-    tokens.push_back(new TokenUp(19,0,x));
-    tokens.push_back(new TokenUp(19,1,x));
-    tokens.push_back(new TokenUp(19,2,x));
-    tokens.push_back(new TokenUp(19,3,x));
-    tokens.push_back(new TokenUp(19,4,x));
+    tokens.push_back(new TokenUp(18,0,x));
+    tokens.push_back(new TokenUp(18,1,x));
+    tokens.push_back(new TokenUp(18,2,x));
+    tokens.push_back(new TokenUp(18,3,x));
+    tokens.push_back(new TokenUp(18,4,x));
 
 }
 
@@ -75,11 +75,12 @@ bool Player::move_player_token(int pos, int value) {
         dest_pos = tokens[index]->get_position() - value;
     }
     int dest_index = find_token(dest_pos);
+    if(dest_index>=0) {
+        if (tokens[dest_index]->get_level() == STACK_MAX_LENGTH - 1) {
+            cout << "Can't place token on it, full";
 
-    if (tokens[dest_index]->get_level() == STACK_MAX_LENGTH - 1){
-        cout<< "Can't place token on it, full";
-
-        return false;
+            return false;
+        }
     }
     if(dest_index == -1){
         tokens[index]->set_position(dest_pos);
@@ -105,5 +106,9 @@ int Player::find_token(int pos){
     return -1;
 }
 
-
+Player::~Player(){
+    for(auto& x:tokens){
+        delete x;
+    }
+}
 

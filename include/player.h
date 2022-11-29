@@ -61,6 +61,8 @@ public:
     int find_token(int pos);
 
     friend class Board;
+
+    ~Player();
 };
 
 #endif //BACKGAMMON_SIMULATOR_PLAYER_H

@@ -13,14 +13,14 @@ void Board::reset_board() {
 void Board::update_table() {
     for(auto& token: player1->tokens){
 
-        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE-1) {
+        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE) {
             table[token->get_position()][token->get_level()] = player1->token_type[0];
         }
     }
 
     for(auto& token: player2->tokens){
 
-        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE-1) {
+        if(token->get_position() > -1 && token->get_position() < COLUMNS_SIZE) {
             table[token->get_position()][token->get_level()] = player2->token_type[0];
         }
     }
