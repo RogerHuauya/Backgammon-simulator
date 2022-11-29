@@ -28,7 +28,7 @@ public:
         return username;
     }
 
-    string getToken() const{
+    string get_token_type() const{
         return token_type;
     }
 
@@ -49,8 +49,6 @@ public:
     }
 
     bool move_player_token(int pos, int value);
-
-
 
     void init_token(bool ascendent);
 

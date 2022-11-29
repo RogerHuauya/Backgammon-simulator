@@ -45,6 +45,7 @@ void Player:: init_token_down(string x){
 
 }
 
+
 void Player::init_token(bool ascendent) {
     is_player_up = ascendent;
     if (is_player_up){
@@ -54,12 +55,14 @@ void Player::init_token(bool ascendent) {
     }
 }
 
+
 bool comp(Token* a, Token* b){
     if (a->position == b->position) {
         return a->level > b->level;
     }
     return a->position < b->position;
 }
+
 
 bool Player::move_player_token(int pos, int value) {
     int index = find_token(pos);
@@ -105,6 +108,7 @@ int Player::find_token(int pos){
     }
     return -1;
 }
+
 
 Player::~Player(){
     for(auto& x:tokens){

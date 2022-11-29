@@ -28,6 +28,8 @@ public:
         dice2 = Dice();
     }
 
+    void roll_dices();
+
     void reset_board();
 
     void update_table();

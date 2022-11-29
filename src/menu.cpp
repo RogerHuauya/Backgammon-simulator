@@ -60,7 +60,7 @@ void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
         }
     }
     if(!ans2){
-        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario";
+        cout << "¡Datos incorrectos!" << endl << "Por favor vuelva a ingresar su usuario" << endl;
         game_board.set_player2(nullptr);
         game_board.set_player1(nullptr);
         return;
@@ -72,6 +72,7 @@ void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
     d3 = rand()%6+1;
     d4 = rand()%6+1;
     string ficha1, ficha2;
+
     cout << "Dados para \"" << game_board.get_player1()->get_username() << "\": "<< d1 << ", " << d2 << endl;
     cout << "Dados para \"" << game_board.get_player2()->get_username() << "\": "<< d3 << ", " << d4 << endl;
     if ((d1+d2)>=(d3+d4)) {
@@ -88,8 +89,11 @@ void set_turn(){ // Aqui se produce la asociacion de player 1 y player 2
     game_board.get_player1()->set_token_type(ficha1[0]);
     game_board.get_player2()->set_token_type(ficha2[0]);
 
-    cout << "Jugador \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha " << game_board.get_player1()->getToken()<<endl;
-    cout << "Jugador \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha " << game_board.get_player2()->getToken()<<endl;
+    cout << "Jugador \"" << game_board.get_player1()->get_username() << "\" jugara con la ficha ";
+    cout << game_board.get_player1()->get_token_type()<<endl;
+
+    cout << "Jugador \"" << game_board.get_player2()->get_username() << "\" jugara con la ficha ";
+    cout << game_board.get_player2()->get_token_type()<<endl;
 }
 
 void init_game(){
@@ -103,13 +107,14 @@ void init_game(){
             finished = game_board.play(cout, cin);
             game_board.reset_board();
             game_board.update_table();
-            //clear_terminal();
+            clear_terminal();
         }
 
     } else {
         cout<<"Numero de usuarios menor a 2";
     }
 }
+
 
 bool validate_number_of_players(){
     if(player_list.size()<2){
@@ -119,11 +124,12 @@ bool validate_number_of_players(){
         return true;
     }
 }
-/*
+
+
 void clear_terminal(){
     system("cls");
 }
-*/
+
 
 void menu(){
     do{
@@ -152,7 +158,7 @@ void menu(){
                 cout << "Opcion no valida" << endl;
                 break;
         }
-        //clear_terminal();
+        clear_terminal();
     }while(op != 0);
 
 

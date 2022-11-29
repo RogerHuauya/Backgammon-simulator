@@ -27,6 +27,10 @@ void Board::update_table() {
 
 }
 
+void Board::roll_dices(){
+    dice1.roll_dice();
+    dice2.roll_dice();
+}
 
 void Board::display_board(){
     color(hConsole,12);
@@ -168,8 +172,8 @@ void Board::init_players(){
 }
 
 bool Board::play(ostream &os, istream &in){
-    dice1.roll_dice();
-    dice2.roll_dice();
+    this->roll_dices();
+
     if(player_turn == 1){
         os<<" −−−−− Turno de Jugador \""<< player1->get_username() << "\" -----"<<endl;
         play_choices(in);
@@ -182,10 +186,7 @@ bool Board::play(ostream &os, istream &in){
     }
     return false;
 }
-ostream& operator<<(ostream &os, const Dice& d){
-    os << d.value;
-    return os;
-}
+
 void Board::play_choices(istream& in){
     cout<<"Dados: " << dice1 <<", "<< dice2<<endl;
     int turns, pos;
